@@ -1,5 +1,7 @@
 export default {
   index: 'Introduction',
   'getting-started': 'Getting started',
-  vaultos: 'VaultOS'
+  concepts: 'Concepts',
+  vaultos: 'VaultOS',
+  status: 'Status and limits'
 }

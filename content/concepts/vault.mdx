@@ -1,0 +1,26 @@
+# The vault
+
+A vault in this demonstration is an on-chain contract that accepts one underlying asset and issues shares in return. The asset and the share token live on Ethereum Sepolia. The vault address is chosen by the factory when the vault is created.
+
+## One asset
+
+Each vault wraps the factory’s approved asset. In the current demonstration that asset is vUSD, a mintable ERC-20 named VaultOS Test Asset. The create form cannot pick a different token. A vault built for another asset would not match the code the factory approves, and the registry would reject it.
+
+vUSD is a faucet token for the demonstration. Holding it, or holding vault shares, is not a claim on a real-world asset and is not a customer balance at PineryZ.
+
+## What creation does
+
+Creation deploys a new vault contract. It does not move vUSD into the vault. The vault starts empty. Value moves later, when a wallet deposits.
+
+The factory records:
+
+- the vault address
+- the underlying asset
+- the wallet that asked for the vault
+- the name and symbol chosen for the shares
+
+Those fields are also what the registry stores after the [registration check](/vaultos/registration) passes.
+
+## What a vault is for
+
+The direction is a reusable vault pattern a business can offer under its own name, instead of assembling that contract stack itself. The demonstration is the pattern: one factory, one approved asset, and a vault the business names. Yield, other assets, and other networks are later product work. They are described in [Status and limits](/status).

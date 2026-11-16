@@ -1,0 +1,230 @@
+/*
+  PineryZ docs theme. Navy chrome, paper page, teal accent.
+  Unlayered rules override Nextra's layered utilities.
+*/
+
+:root {
+  --color-navy: #0b1c2c;
+  --color-navy-deep: #07141f;
+  --color-navy-raised: #12283a;
+  --color-teal: #0f5f73;
+  --color-on-teal: #f4fbfc;
+  --color-paper: #f4f6f8;
+  --color-paper-raised: #fbfcfd;
+  --color-ink: #1a2330;
+  --color-line: #d5dde6;
+  --color-line-inverse: rgba(244, 246, 248, 0.16);
+  --color-text-inverse: #f4f6f8;
+  --color-text-inverse-soft: #c5d0db;
+  --font-sans: var(--font-plex-sans), "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+html {
+  --x-font-sans: var(--font-sans);
+  --x-default-font-family: var(--font-sans);
+  font-family: var(--font-sans);
+}
+
+.nextra-navbar {
+  color: var(--color-text-inverse);
+}
+
+.nextra-navbar-blur {
+  background: var(--color-navy);
+  border-bottom-color: var(--color-line-inverse);
+  backdrop-filter: none;
+}
+
+.docs-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-inverse);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.docs-wordmark img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+}
+
+.docs-wordmark-label {
+  color: var(--color-text-inverse-soft);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.docs-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.docs-nav-links a {
+  color: var(--color-text-inverse);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  padding: 8px 10px;
+  border: 1px solid var(--color-line-inverse);
+  border-radius: 4px;
+}
+
+.docs-nav-links a:hover {
+  background: var(--color-navy-raised);
+}
+
+.nextra-navbar button {
+  color: var(--color-text-inverse);
+}
+
+.nextra-sidebar,
+.nextra-mobile-nav {
+  background: var(--color-navy);
+  color: var(--color-text-inverse-soft);
+}
+
+.dark .nextra-sidebar,
+.dark .nextra-mobile-nav {
+  background: var(--color-navy-deep);
+}
+
+.nextra-sidebar a,
+.nextra-mobile-nav a,
+.nextra-sidebar button,
+.nextra-mobile-nav button {
+  color: var(--color-text-inverse-soft);
+}
+
+.nextra-sidebar a:hover,
+.nextra-mobile-nav a:hover,
+.nextra-sidebar button:hover,
+.nextra-mobile-nav button:hover {
+  background: var(--color-navy-raised);
+  color: var(--color-text-inverse);
+}
+
+.nextra-sidebar a.x\:bg-primary-100,
+.nextra-mobile-nav a.x\:bg-primary-100 {
+  background: var(--color-teal);
+  color: var(--color-on-teal);
+}
+
+.nextra-sidebar-footer {
+  border-top-color: var(--color-line-inverse);
+}
+
+.nextra-callout {
+  border-radius: 4px;
+  border-color: var(--color-teal);
+  background: #e7f1f4;
+  color: var(--color-navy);
+}
+
+.dark .nextra-callout {
+  border-color: #6eafc2;
+  background: var(--color-navy-raised);
+  color: var(--color-text-inverse);
+}
+
+.nextra-cards {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.nextra-card {
+  border-radius: 4px;
+  border-color: var(--color-line);
+  background: var(--color-paper-raised);
+  box-shadow: none;
+  color: var(--color-ink);
+}
+
+.nextra-card > span {
+  order: -1;
+  color: var(--color-ink);
+}
+
+.nextra-card:hover {
+  border-color: var(--color-teal);
+  background: var(--color-paper-raised);
+  box-shadow: none;
+}
+
+.dark .nextra-card,
+.dark .nextra-card > span {
+  border-color: var(--color-line-inverse);
+  background: var(--color-navy-raised);
+  color: var(--color-text-inverse);
+}
+
+.dark .nextra-card:hover {
+  border-color: #6eafc2;
+  background: var(--color-navy-raised);
+}
+
+.docs-footer {
+  background: var(--x-color-neutral-900, #171717);
+  color: #c5d0db;
+}
+
+.docs-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--nextra-content-width);
+  margin: 0 auto;
+  padding: 20px max(env(safe-area-inset-right), 1.5rem) calc(20px + env(safe-area-inset-bottom))
+    max(env(safe-area-inset-left), 1.5rem);
+}
+
+.docs-footer-copy {
+  margin: 0;
+  color: #c5d0db;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.docs-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.docs-footer-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--x-color-white);
+  text-decoration: none;
+}
+
+.docs-footer-social svg {
+  width: 18px;
+  height: 18px;
+}
+
+.docs-footer-social:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .docs-wordmark-label {
+    display: none;
+  }
+
+  .docs-nav-links a {
+    padding: 8px;
+  }
+}

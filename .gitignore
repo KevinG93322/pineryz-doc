@@ -38,3 +38,6 @@ next-env.d.ts
 
 # search index
 /public/_pagefind/
+
+# private circulation documents; not published and not committed
+/private/

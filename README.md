@@ -15,7 +15,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Content
 
-Edit Markdown/MDX under `content/`. Sidebar order is controlled by `content/_meta.js`.
+Edit Markdown/MDX under `content/`. Sidebar order is controlled by `_meta.js` in each folder.
+
+| Section | What it covers |
+| --- | --- |
+| Introduction | How to read the docs, and what the demonstration is |
+| Getting started | Wallet, Sepolia ETH, and the first vault |
+| Concepts | Vault, shares, name and symbol, console and registry |
+| VaultOS | The Sepolia demonstration, registration, contracts, and careers |
+| Status and limits | What the demonstration includes and what it leaves out |
+
+Write the demonstration from the console and the deployed contracts. Keep yield, custody, mainnet, audits, and customer claims on the status page unless a page is explicitly describing direction.
 
 ## Deploy to docs.pineryz.com
 
@@ -31,5 +41,5 @@ Edit Markdown/MDX under `content/`. Sidebar order is controlled by `content/_met
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Local docs server |
-| `npm run build` | Production build + Pagefind search index |
+| `npm run build` | Production build |
 | `npm start` | Serve the production build |

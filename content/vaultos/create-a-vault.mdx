@@ -1,0 +1,44 @@
+# Create a vault
+
+<Callout type="important">
+  Technical demonstration on Ethereum Sepolia. The wallet signs every transaction. VaultOS does not receive the key.
+</Callout>
+
+Create a vault from [the console](https://demo.pineryz.com/create). The factory picks the vault address. You pick the name and the symbol.
+
+<Steps>
+
+### Connect
+
+Connect the wallet from the top of the console. If it is on another network, switch to Ethereum Sepolia. The create form stays disabled until the wallet is on chain `11155111`.
+
+You need Sepolia ETH for gas. Minting vUSD does not pay gas.
+
+### Mint vUSD
+
+On Create Vault, the demonstration asset panel reads your vUSD balance from Sepolia. Enter an amount greater than zero and mint. The wallet signs a mint on the test asset.
+
+The amount field clears after the mint confirms. If the balance read fails, use Try again on that panel. Minting is public: the same contract will mint to any address that calls it.
+
+### Name the vault
+
+| Field | Rule |
+| --- | --- |
+| Vault name | Required. 64 bytes or fewer. |
+| Share symbol | Required. 16 bytes or fewer. |
+
+The underlying asset shown above the form is the factory’s vUSD. The form cannot substitute another token.
+
+### Create and register
+
+Submit **Create vault**. The wallet signs `createVault`. After the transaction is included, the console sends the hash to the registry and the button label changes while that check runs.
+
+When registration succeeds, the screen links the transaction, the vault address, and the new registry record. Open the record to deposit. When the transaction confirms and registration fails, the vault can still exist on Sepolia. The on-screen message is the registry’s reason. Creating again with the same name deploys another vault. It does not repair the failed registration.
+
+Sending a creation hash that is already stored returns the existing record and does not add a second one.
+
+</Steps>
+
+## If the wallet rejects the request
+
+The console leaves the vault unregistered and shows that the wallet rejected the request. Connect again, confirm you are on Ethereum Sepolia, and submit once. A double submit is ignored while a create or a registration is already in progress.

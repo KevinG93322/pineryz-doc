@@ -1,0 +1,44 @@
+# Registration
+
+Registration is the check between a creation transaction on Ethereum Sepolia and a row in the VaultOS registry. The console sends the transaction hash. The registry reads the chain. Assets stay in the wallet and in the vault either way.
+
+A registered vault is a metadata record: name, symbol, addresses, deployer, factory, creation transaction, and code hash. It is not a custody receipt.
+
+## What the registry accepts
+
+All of the following have to be true:
+
+1. The chain id is `11155111`, and the configured RPC reports that same chain.
+2. The hash is a transaction hash, and Sepolia has a successful receipt for it.
+3. The receipt contains one vault-creation event from the authorized factory.
+4. The event names a vault, the approved asset, a deployer, a name, and a symbol.
+5. The vault is not the factory’s reference vault. That address exists only to pin the approved code, and it is not a customer vault.
+6. The factory marks the address as a vault it created.
+7. The vault’s asset is the factory’s test asset.
+8. The vault’s runtime code matches the factory’s approved code for that asset.
+
+When those checks pass, the registry stores one row. The same transaction or the same vault address a second time returns that row.
+
+## Why a creation can be refused
+
+The console shows a short reason. The meanings below match those reasons.
+
+| Reason | What failed |
+| --- | --- |
+| No transaction receipt was found | Sepolia has no receipt for that hash. |
+| That transaction did not succeed | The receipt status is a failure. |
+| That transaction was not sent to the authorized factory | The call went somewhere other than this demonstration’s factory. |
+| That transaction did not emit a vault creation event | The factory was called, and the creation event was absent. |
+| The vault creation event could not be verified | The event was malformed, or the receipt contained more than one creation event. |
+| The factory reference vault cannot be registered | The address is the bytecode reference the factory deployed for itself. |
+| The factory has not registered the vault | The factory’s own record does not list this address as a created vault. |
+| The vault asset does not match the factory’s approved asset | The event asset or the vault asset is not vUSD. |
+| The deployed vault code does not match | The runtime code is not the code this factory approves for vUSD. |
+| The registry only accepts chain 11155111 | The request named another chain. |
+| The registry could not reach the configured chain | The RPC call failed. |
+
+A refused registration is stored as a failed check. The contracts on Sepolia are unchanged by that record.
+
+## What registration does not decide
+
+The registry does not score the vault, assign a strategy, or attest to reserves beyond the reads above. A matching code hash shows that the vault was built as this factory builds vaults for vUSD. It does not show that a different factory, or a different asset, produced an equivalent product.

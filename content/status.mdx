@@ -1,0 +1,44 @@
+# Status and limits
+
+<Callout type="important">
+  Technical demonstration on Ethereum Sepolia. A sentence that describes yield, custody, or a public API is describing direction.
+</Callout>
+
+VaultOS is PineryZ’s planned flagship, shown today as a technical demonstration. These docs describe that demonstration and the direction around it.
+
+## What you can do today
+
+On [demo.pineryz.com](https://demo.pineryz.com), with a wallet on Ethereum Sepolia:
+
+- Mint demonstration vUSD from the public test asset
+- Create a vault under a name and symbol you choose
+- Have the registry verify the creation transaction and store the vault
+- Read balances from the chain
+- Approve vUSD, deposit it, withdraw assets, or redeem shares
+- Open the creation transaction and the vault address on the Sepolia explorer
+
+The wallet signs each of those transactions. The console submits them through the wallet. It does not store the key.
+
+## Outside this demonstration
+
+The public demonstration does not include the following. A page that discusses one of them is describing direction, unless it says the demonstration already does it.
+
+- Ethereum mainnet, or any network other than Ethereum Sepolia for this factory
+- A production settlement asset, custody, or a customer deposit of real value
+- Yield, strategies, NAV, or curator operations
+- A public GraphQL API or a documented integration API for a customer site
+- Contract deployment from the console
+- A completed security audit, a customer list, or a production deployment
+- Pricing, licenses, or regulatory registration
+
+vUSD can be minted by anyone who calls the test asset. Balances in the console are chain reads of that token and of vault shares. Overview counts registry records. Those counts are not assets under management, volume, or performance.
+
+## How to read product language
+
+| Phrase in these docs | What it means |
+| --- | --- |
+| Technical demonstration | The Sepolia console and the contracts it uses |
+| Planned, direction, or later | A product intention that is not part of the demonstration |
+| Registered | The registry verified the creation transaction and stored the vault metadata |
+
+When a sentence and the [demonstration](/vaultos/demonstration) disagree, trust the demonstration page and this page.

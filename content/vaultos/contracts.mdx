@@ -1,0 +1,31 @@
+# Contracts
+
+The demonstration uses three contracts on Ethereum Sepolia. They are already deployed. Addresses are also listed under [The demonstration](/vaultos/demonstration) and in the console’s Settings screen.
+
+| Contract | Address | Role |
+| --- | --- | --- |
+| TestAsset (vUSD) | [`0xf08328fE711EE112A06345383C7D5e00009641Ab`](https://sepolia.etherscan.io/address/0xf08328fE711EE112A06345383C7D5e00009641Ab) | The only underlying asset the factory will wrap |
+| VaultFactory | [`0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B`](https://sepolia.etherscan.io/address/0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B) | Deploys a vault for that asset |
+| Vault | Created per call | Holds vUSD and issues ERC-4626 shares |
+
+## Test asset
+
+TestAsset is an ERC-20 named VaultOS Test Asset, symbol vUSD. `mint` is public. Any caller can mint any positive amount to any non-zero address. That is a faucet for the demonstration. It is not a production settlement asset, and the tokens are not redeemable for anything off the testnet.
+
+## Factory
+
+`createVault(name, symbol)` deploys a vault, records the caller as deployer, and emits `VaultCreated` with the vault, the asset, the deployer, the name, and the symbol.
+
+The factory accepts one asset, fixed at deployment. The name can be at most 64 bytes and the symbol at most 16 bytes. Both are required. The factory checks that the new vault’s runtime code matches a reference vault it deployed in its constructor for this same asset. The reference vault is not a customer vault: it is excluded from the factory’s created-vault list, and the registry refuses to store it.
+
+A matching code hash is meaningful for this asset and this compilation. A vault constructed with a different asset has different runtime code, because the asset address is part of that code. A matching hash alone does not prove this factory deployed the vault. The registry also requires the factory’s created-vault flag and the creation event. Those checks are the list on [Registration](/vaultos/registration).
+
+## Vault
+
+Each vault is an ERC-4626 contract over vUSD. The share token uses the name and symbol from `createVault`. The deployer address is stored in the vault and can be read later.
+
+Share accounting is OpenZeppelin’s ERC-4626 implementation. The demonstration adds one restriction: a deposit of more than zero assets that would mint zero shares is reverted before the token transfer. The contract does not add a fee, a strategy, or an admin withdrawal.
+
+## What the console will not deploy
+
+Settings states that this demonstration does not deploy new contracts, does not target Ethereum mainnet, and does not store wallet keys. A new factory or a new test asset would be a separate deployment, outside the console.

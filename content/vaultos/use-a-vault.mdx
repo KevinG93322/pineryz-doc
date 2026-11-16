@@ -1,0 +1,44 @@
+# Use a vault
+
+<Callout type="important">
+  Technical demonstration on Ethereum Sepolia. Balances on this page are reads from the chain.
+</Callout>
+
+Open a registered vault from Overview or My Vaults. The page reads balances from Ethereum Sepolia and sends deposit, withdraw, and redeem through the connected wallet.
+
+Connect the wallet on Ethereum Sepolia before you move funds. Until you do, the page can still show the vault’s total assets, and your own balances stay unread.
+
+## What the page reads
+
+| Figure | Source |
+| --- | --- |
+| Vault total assets | vUSD held by the vault contract |
+| Your vUSD | The connected wallet’s test-asset balance |
+| Your vault shares | The connected wallet’s share balance |
+| vUSD allowance | How much vUSD the vault is allowed to pull from the wallet |
+
+If a read fails, the page says the balances are unavailable and offers another read. A failed read does not change the vault.
+
+<Steps>
+
+### Deposit
+
+Enter a vUSD amount and submit **Deposit**. The form previews how many shares that amount would mint at the current rate. The amount has to be greater than zero and within the token’s decimals. A deposit that would mint zero shares is stopped before the wallet is asked to move tokens.
+
+If the vault’s allowance is below the amount, the wallet is asked to approve vUSD first, and then to deposit. That is two signatures. If the allowance already covers the amount, the wallet signs the deposit only. After the deposit confirms, the page reads the position again. See [Shares](/concepts/shares) for how the number of shares is set.
+
+### Withdraw
+
+**Withdraw assets** asks for the amount of vUSD to receive. The vault burns the shares required for that amount. **Use withdrawable balance** fills the amount the chain currently allows this wallet to withdraw.
+
+### Redeem
+
+**Redeem shares** asks for the amount of shares to burn. The vault sends the vUSD those shares represent. **Use redeemable shares** fills the amount the chain currently allows this wallet to redeem.
+
+An amount above that balance is rejected in the form, before a transaction is sent. You cannot take out more than the shares you hold, and you cannot take out more vUSD than the vault holds.
+
+</Steps>
+
+## Receipts
+
+Deposit, withdraw, and redeem receipts stay on Ethereum Sepolia. The console links a receipt after the wallet confirms it. Transaction History in the sidebar lists creation records from the registry, not every deposit.

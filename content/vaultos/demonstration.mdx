@@ -1,0 +1,48 @@
+# The demonstration
+
+<Callout type="important">
+  Technical demonstration on Ethereum Sepolia. The contracts below are already deployed. The console does not deploy replacements.
+</Callout>
+
+The public VaultOS console runs at [demo.pineryz.com](https://demo.pineryz.com). It is labeled a technical demonstration in the product chrome.
+
+## Network
+
+| | |
+| --- | --- |
+| Network | Ethereum Sepolia |
+| Chain id | `11155111` |
+| Gas | Sepolia ETH, paid by the connected wallet |
+| Explorer | [sepolia.etherscan.io](https://sepolia.etherscan.io/) |
+| Test asset (vUSD) | [`0xf08328fE711EE112A06345383C7D5e00009641Ab`](https://sepolia.etherscan.io/address/0xf08328fE711EE112A06345383C7D5e00009641Ab) |
+| Vault factory | [`0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B`](https://sepolia.etherscan.io/address/0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B) |
+
+The registry accepts chain `11155111` for this factory. A transaction on another chain is rejected even if the hash looks well formed.
+
+## Console
+
+| Screen | What it shows |
+| --- | --- |
+| Overview | How many vaults the registry has stored, and the latest entries. The counts are registry rows, not balances or performance. |
+| My Vaults | The registered vaults, with name, symbol, and asset. |
+| Create Vault | Mint vUSD, then create a vault from the connected wallet. Registration follows the creation transaction. |
+| Transaction History | Creation transactions the registry stored. |
+| Settings | Network, wallet, test asset, factory, and explorer. Settings do not change the deployment. |
+
+Connect an external wallet and switch it to Ethereum Sepolia before creating or moving assets. If the wallet is on another chain, the console asks you to switch and will not submit the transaction.
+
+## A pass through the system
+
+1. The wallet mints vUSD from the test asset. Anyone can mint. The tokens are demonstration assets.
+2. The wallet calls the factory with a name and a symbol. The factory deploys the vault and emits the creation event.
+3. The console sends that transaction hash to the registry.
+4. The registry reads the receipt and the deployed vault, then stores the vault when every check passes.
+5. From the vault page, the same wallet approves vUSD, deposits it, withdraws assets, or redeems shares.
+
+Step 2 and step 4 can diverge. A vault can exist on Sepolia and still be absent from My Vaults when registration fails. The message on the create screen names the failed check. The checks themselves are on [Registration](/vaultos/registration).
+
+## Wallet
+
+The console talks to the wallet in the browser. It requests accounts, reads the chain id, and asks the wallet to sign. Disconnecting the wallet in the console clears the session in the page. It does not remove the account from the wallet extension.
+
+VaultOS never receives the private key. A rejected signature stops the action. A wallet without enough Sepolia ETH cannot pay gas, and the console reports that.

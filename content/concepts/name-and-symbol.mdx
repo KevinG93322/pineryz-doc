@@ -1,0 +1,20 @@
+# Name and symbol
+
+The business chooses the vault name and the share symbol. Those two strings are what a holder sees on the share token. PineryZ stays underneath: the factory, the registry, and the console are the infrastructure, and the name on the vault is the business’s.
+
+## What you can set
+
+| Field | Limit | Example role |
+| --- | --- | --- |
+| Vault name | 1 to 64 bytes | The product name a customer would recognize |
+| Share symbol | 1 to 16 bytes | The short ticker on the share token |
+
+The limit is bytes, so a character outside basic ASCII can consume more than one. Empty values are rejected by the factory and by the console form. The factory also rejects names and symbols over those limits.
+
+The name and symbol are stored on the vault. They do not change the vault’s runtime code. Two vaults with different names can still match the factory’s approved code, because the approved code is tied to the asset, not to the label.
+
+## What you cannot set
+
+In this demonstration the underlying asset is fixed. Creating a vault named for a business does not change the asset from vUSD, does not assign the vault to a separate legal entity, and does not publish it on a network other than Ethereum Sepolia.
+
+White-label, in the current demonstration, means the name and the symbol. Hosted branding, a separate deployment per customer, and APIs a customer embeds on its own site are product direction. They are listed as open scope in [Status and limits](/status).
