@@ -1,0 +1,74 @@
+# The foundation
+
+The vault pattern is already running. This page is that deployment: the network, the contracts, and the console. The product built on it starts at the [introduction](/). This deployment is the bench. It is not the product being delivered.
+
+<Callout type="important">
+  Ethereum Sepolia. vUSD is a public test asset with no market value. The console does not deploy new contracts, does not target mainnet, and does not hold the wallet key.
+</Callout>
+
+## Network
+
+| | |
+| --- | --- |
+| Network | Ethereum Sepolia |
+| Chain id | `11155111` |
+| Gas | Sepolia ETH, paid by the connected wallet |
+| Explorer | [sepolia.etherscan.io](https://sepolia.etherscan.io/) |
+| Test asset (vUSD) | [`0xf08328fE711EE112A06345383C7D5e00009641Ab`](https://sepolia.etherscan.io/address/0xf08328fE711EE112A06345383C7D5e00009641Ab) |
+| Vault factory | [`0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B`](https://sepolia.etherscan.io/address/0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B) |
+| Console | [demo.pineryz.com](https://demo.pineryz.com) |
+
+The registry accepts chain `11155111` for this factory. A transaction on another chain is refused. The reason states that chain id.
+
+## Contracts
+
+Three contracts are deployed. The console does not replace them.
+
+| Contract | Address | Role |
+| --- | --- | --- |
+| TestAsset (vUSD) | [`0xf08328fE711EE112A06345383C7D5e00009641Ab`](https://sepolia.etherscan.io/address/0xf08328fE711EE112A06345383C7D5e00009641Ab) | The only asset this factory wraps |
+| VaultFactory | [`0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B`](https://sepolia.etherscan.io/address/0x41AF576177D3955fdCb1A9e074A864E6F14A9D4B) | Deploys a vault for that asset |
+| Vault | Created per call | Holds vUSD and issues ERC-4626 shares |
+
+TestAsset is an ERC-20 named VaultOS Test Asset, symbol vUSD. `mint` is public. Any caller can mint any positive amount to any non-zero address. The tokens are not redeemable for anything off this network. Replacing this faucet is the asset decision in the [first release](/vaultos/use-a-vault).
+
+`createVault(name, symbol)` deploys a vault, records the caller as deployer, and emits `VaultCreated` with the vault, the asset, the deployer, the name, and the symbol. The name can be at most 64 bytes and the symbol at most 16 bytes. Both are required. The factory checks the new vault’s runtime code against a reference vault it deployed for this same asset. That reference vault is not offered to a business. The registry refuses to list it.
+
+A matching code hash is for this asset and this compilation. The asset address is part of the code, so a vault for a different asset does not match. The hash alone does not list the vault. [Registration](/vaultos/registration) also requires the factory’s created-vault flag and one creation event.
+
+Each vault is an ERC-4626 contract over vUSD, using OpenZeppelin’s accounting. The share uses the name and symbol from `createVault`. A deposit of more than zero that would mint zero shares is reverted before the token transfer. This deployment adds no fee, no strategy, and no admin withdrawal.
+
+## Console
+
+Open [demo.pineryz.com](https://demo.pineryz.com). Connect an external wallet and switch it to Ethereum Sepolia. If the wallet is on another chain, the console asks for a switch and will not submit the transaction. The wallet pays gas in Sepolia ETH. The console does not supply that ETH.
+
+| Screen | What it shows |
+| --- | --- |
+| Overview | How many vaults the registry has stored, and the latest entries. The counts are registry rows, not balances or performance. |
+| My Vaults | The listed vaults, with name, symbol, and asset. |
+| Create Vault | Mint vUSD, then create a vault from the connected wallet. Registration follows the creation transaction. |
+| Transaction History | Creation transactions the registry stored. Deposits, withdrawals, and redemptions stay on the chain. The vault page links those receipts after the wallet confirms them. |
+| Settings | Network, wallet, test asset, factory, and explorer. Settings do not change the deployment. |
+
+A pass through this deployment:
+
+1. The wallet mints vUSD. Anyone can mint.
+2. The wallet calls the factory with a name and a symbol. The factory deploys the vault.
+3. The console sends that transaction hash and chain id `11155111` to the registry.
+4. The registry reads the receipt and lists the vault when every check passes.
+5. The same wallet approves vUSD, deposits it, withdraws assets, or redeems shares.
+
+A vault can exist on Sepolia and stay off My Vaults when registration fails. The create screen names the failed check.
+
+The console requests accounts, reads the chain id, and asks the wallet to sign. Disconnecting in the console clears the page session. It does not remove the account from the wallet. A rejected signature stops the action. VaultOS does not receive the private key.
+
+## What this deployment leaves for the product
+
+| Running here | The product does with it |
+| --- | --- |
+| A test asset anyone can mint | Replaced by an asset with controlled supply |
+| This console as the interface | Becomes one client of the operator API |
+| One signing wallet, and no roles | Gains an operator, then a signer and a reader |
+| Ethereum Sepolia as the only network | Stays the bench until a product network is chosen |
+
+That work is on [Operate a vault](/vaultos/use-a-vault) and [The build](/vaultos/build).

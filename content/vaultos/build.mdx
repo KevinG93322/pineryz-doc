@@ -1,0 +1,78 @@
+# The build
+
+The first release makes a vault operable. [Create a vault](/vaultos/create-a-vault) and [Operate a vault](/vaultos/use-a-vault) describe that release. This page is the work that follows it.
+
+The order keeps the share standard stable, and it keeps an asset of value off the system until the asset is controlled and the contracts have been reviewed. No phase has a date. The order can change when an asset, a network, or a first segment is chosen. Choosing a segment can pull a later phase forward. It does not skip the operable vault.
+
+<Callout type="important">
+  These phases are the intended build. They may be reordered, reduced, or dropped. This page states no release date, and it is not an offer of securities.
+</Callout>
+
+## After the first release
+
+| Phase | What gets built |
+| --- | --- |
+| Strategies | Assets inside the vault can be put to work, behind the same share. |
+| Institutional operation | Roles, approvals, and records a firm needs when it offers the vault to its own clients. |
+| Real-world assets | A vault whose asset stands for something off the chain. |
+| Other builders | A stable API and SDK, so another firm can offer the vault in its own application. |
+
+### Strategies
+
+A defined module deploys vault assets, through a narrow adapter, within an allocation limit, with a way to rebalance and a way to halt. No strategy is named here. Naming one would invent a product.
+
+This phase starts after the first release. The asset has to be controlled, and the vault, the factory, and the registration checks have to have been reviewed. A strategy is not built on an asset anyone can mint.
+
+The share the holder owns stays [ERC-4626](/concepts/shares). What changes is that assets inside the vault can leave the idle balance, work, and return, and the share still accounts for them.
+
+### Institutional operation
+
+This phase separates three roles. The first release introduces the operator. Here the operator, the signer, and the reader have powers written down. Permissioning decides who may create a vault, deposit, or change configuration.
+
+Custody is a decision in this phase: an integration with a custodian, or an explicit statement that assets stay in the wallet and the vault. The build does not assume VaultOS takes custody. Sensitive actions can require a second approval. The firm can export holdings and flows for its own file. The shape of that file is not chosen yet.
+
+Building these controls does not make the product a regulated service. No license is claimed, and no institution is named as a partner.
+
+### Real-world assets
+
+This phase is the work of serving a platform whose token stands for an off-chain asset. The token has a registered origin: what it stands for, who originated it, and which vault may hold it. Someone verifies that the off-chain asset and the on-chain token still match. Who performs that check is open: PineryZ, the business, or a third party. Transfer limits decide who may hold the share.
+
+The factory today is fixed to one asset. This phase is a new asset model on the same share standard. Private credit, a vault of credit claims, is included only if that product is chosen. It is not a committed build.
+
+This phase waits on the institutional controls. A tokenized asset without roles, eligibility, and a verification duty is outside the build.
+
+### Other builders
+
+The operator API from the first release is frozen enough that another team can build on it. Until that shape exists, an SDK would be a guess. The SDK creates, reads, and operates a vault, and the wallet still signs on the holder’s side.
+
+A firm’s own product can then list vaults and request signatures, using the API instead of the PineryZ console. If the white-label decision allows it, a business can run the stack under its own brand rather than only calling a shared API. Room remains for a financial product besides the vault, on the same factory, registry, and controls. None is specified.
+
+## What has to be true first
+
+| Before this | This has to be done |
+| --- | --- |
+| An asset of value | Controlled supply, and a review of the vault, the factory, and the registration checks |
+| Strategies | The first release, on an asset that is not a public mint |
+| Institutional operation | An operator, a pause, and a ledger |
+| Real-world assets | Those institutional controls, and a new asset model |
+| An SDK | A stable shape for the operator API |
+
+## Decisions that can change the order
+
+| Decision | What is open |
+| --- | --- |
+| First segment | Real-world assets, asset managers, decentralized finance, fintech, or Web3. None is chosen. |
+| White-label depth | The name and the symbol are set at creation. Hosted branding, and a deployment under the firm’s own brand, are open. |
+| Custody | Integrate a custodian, or keep assets in the wallet and the vault. Institutional operation is built differently in each case. |
+
+Three things stay put if the order changes. The product does not take the private key. The share stays ERC-4626. An operable vault still comes before strategies, a firm’s controls, and an SDK.
+
+## Beside the phases
+
+Review, the next network, and the stack sit beside these phases. They are how the product leaves the bench. They are not a further product, and they have no date.
+
+The vault, the factory, and the registration checks are reviewed before an asset of value is accepted. No independent audit is complete. Completing one is work on this page.
+
+The product needs a network chosen for it. That choice is open. Mainnet is not assumed, and it is not a milestone with a date. The wallet still signs on that network. The product still does not take the private key.
+
+The build extends the stack already in use: Solidity and ERC-4626, Node.js and TypeScript, PostgreSQL, React and Next.js, and an external wallet for signatures. A second region is later operational work, once a business is running a vault.

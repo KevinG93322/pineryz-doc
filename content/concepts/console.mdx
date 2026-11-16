@@ -1,23 +1,23 @@
 # Console and registry
 
-Three systems are involved every time a vault appears in the console. They do different jobs, and mixing them up is the usual source of confusion.
+Three systems take part whenever a vault is listed. Each one has a separate job.
 
-| System | What it does | What it does not do |
+| System | What it does | What it leaves alone |
 | --- | --- | --- |
-| Wallet and Ethereum Sepolia | Signs and submits transactions. Holds the key and the assets. | It does not decide that a vault is “registered.” |
+| Wallet | Signs and submits transactions. Holds the key and the assets. | It does not decide that a vault is listed. |
 | Console | Builds the transaction, shows chain data, and sends the creation hash to the registry. | It does not keep the private key, and it does not deploy a new factory. |
 | Registry | Reads the creation transaction from the chain, runs the checks, and stores vault metadata in PostgreSQL. | It does not custody assets. Balances stay on the vault contract. |
 
 ## After creation
 
-The wallet calls the factory. When the transaction is included, the console sends the transaction hash and chain id `11155111` to the registry. The registry loads the receipt, reads the factory event, and compares the deployed vault with the factory’s approved asset and code. The checks are listed on [Registration](/vaultos/registration).
+The wallet calls the factory. When the transaction is included, the console sends the transaction hash to the registry. The registry loads the receipt, reads the factory event, and compares the deployed vault with the factory’s approved asset and code. The checks are on [Registration](/vaultos/registration).
 
-If the checks pass, the registry stores the vault: name, symbol, addresses, deployer, factory, creation transaction, and code hash. The vault then shows under Overview and My Vaults. If the checks fail, the creation can still exist on Sepolia while the console has no registry record. The on-chain vault and the registry row are separate facts.
+If the checks pass, the registry stores the vault: name, symbol, addresses, deployer, factory, creation transaction, and code hash. The vault is then listed. If the checks fail, the creation can still exist on the chain while the registry has no row. The on-chain vault and the registry row are separate facts.
 
 Submitting the same creation transaction again does not create a second row. The registry returns the existing record.
 
 ## What the screens are counting
 
-Overview and Transaction History read the registry. A creation appears in Transaction History because the registry stored it. Deposits, withdrawals, and redemptions stay on Sepolia. The console links those receipts from the vault after the wallet confirms them. It does not copy every transfer into the registry.
+Overview and Transaction History read the registry. A creation appears in Transaction History because the registry stored it. Deposits, withdrawals, and redemptions stay on the chain. The console links those receipts from the vault after the wallet confirms them. It does not copy every transfer into the registry.
 
-Settings shows the demonstration identity: network, gas currency, test asset, factory, and whether a wallet is connected. It does not edit deployment settings.
+Settings shows the deployment the console is pointed at: network, gas, asset, factory, and whether a wallet is connected. It does not edit that deployment. The deployment running today is on [The foundation](/vaultos/foundation).

@@ -1,44 +1,33 @@
 # Create a vault
 
-<Callout type="important">
-  Technical demonstration on Ethereum Sepolia. The wallet signs every transaction. VaultOS does not receive the key.
-</Callout>
+A business creates a vault by choosing its name and its symbol. The factory deploys the contract and chooses the address. The vault starts empty. The wallet that asks for the vault signs the creation. The product does not take the private key.
 
-Create a vault from [the console](https://demo.pineryz.com/create). The factory picks the vault address. You pick the name and the symbol.
-
-<Steps>
-
-### Connect
-
-Connect the wallet from the top of the console. If it is on another network, switch to Ethereum Sepolia. The create form stays disabled until the wallet is on chain `11155111`.
-
-You need Sepolia ETH for gas. Minting vUSD does not pay gas.
-
-### Mint vUSD
-
-On Create Vault, the demonstration asset panel reads your vUSD balance from Sepolia. Enter an amount greater than zero and mint. The wallet signs a mint on the test asset.
-
-The amount field clears after the mint confirms. If the balance read fails, use Try again on that panel. Minting is public: the same contract will mint to any address that calls it.
-
-### Name the vault
+## What is set at creation
 
 | Field | Rule |
 | --- | --- |
-| Vault name | Required. 64 bytes or fewer. |
-| Share symbol | Required. 16 bytes or fewer. |
+| Vault name | Required. 1 to 64 bytes. This is the name a holder sees. |
+| Share symbol | Required. 1 to 16 bytes. This is the ticker on the share. |
+| Asset | The one asset the factory is built for. Creation does not substitute a different token. |
 
-The underlying asset shown above the form is the factory’s vUSD. The form cannot substitute another token.
+The limits, and what the name does not decide, are on [Name and symbol](/concepts/name-and-symbol). The vault itself is on [The vault](/concepts/vault).
 
-### Create and register
+## What creation does
 
-Submit **Create vault**. The wallet signs `createVault`. After the transaction is included, the console sends the hash to the registry and the button label changes while that check runs.
+The factory records the vault address, the underlying asset, the wallet that asked for the vault, and the name and symbol. It does not move the asset into the vault. Value moves later, when a holder deposits.
 
-When registration succeeds, the screen links the transaction, the vault address, and the new registry record. Open the record to deposit. When the transaction confirms and registration fails, the vault can still exist on Sepolia. The on-screen message is the registry’s reason. Creating again with the same name deploys another vault. It does not repair the failed registration.
+After the creation transaction is included, the registry checks it. A vault is listed only when that check passes. The checks are on [Registration](/vaultos/registration).
 
-Sending a creation hash that is already stored returns the existing record and does not add a second one.
+If the transaction confirms and registration fails, the vault can still exist on the chain. The registry’s reason is the record of that failure. Creating again with the same name deploys another vault. It does not repair the failed registration. Sending a creation hash that is already stored returns the existing record and does not add a second one.
 
-</Steps>
+If the wallet rejects the request, nothing is deployed and nothing is listed.
 
-## If the wallet rejects the request
+## Before this can lock
 
-The console leaves the vault unregistered and shows that the wallet rejected the request. Connect again, confirm you are on Ethereum Sepolia, and submit once. A double submit is ignored while a create or a registration is already in progress.
+Three decisions are still open. None of them is chosen.
+
+- Which asset the vault holds, and who may mint it. Supply of that asset is controlled.
+- How far white-label goes beyond the name and the symbol.
+- Whether the API is a shared service, or a deployment for each business.
+
+The first release still creates a vault the same way: a name, a symbol, one controlled asset, a signature, and then the registration check.

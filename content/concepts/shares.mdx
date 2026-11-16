@@ -1,23 +1,25 @@
 # Shares
 
-The vault share is an ERC-20. You receive shares when you deposit vUSD, and you give shares back when you withdraw or redeem. The demonstration uses the [ERC-4626](https://eips.ethereum.org/EIPS/eip-4626) tokenized-vault standard, as implemented by OpenZeppelin, with one extra guard on deposits.
+The vault share is an ERC-20. A holder receives shares when they deposit the vault’s asset, and returns shares when they withdraw or redeem. Accounting follows the [ERC-4626](https://eips.ethereum.org/EIPS/eip-4626) tokenized-vault standard, as implemented by OpenZeppelin, with one extra guard on deposits.
 
 ## Deposit, withdraw, redeem
 
-| Action | You specify | You receive |
+| Action | The holder specifies | The holder receives |
 | --- | --- | --- |
-| Deposit | An amount of vUSD | Vault shares |
-| Withdraw | An amount of vUSD to take out | vUSD, and the vault burns the shares required |
-| Redeem | An amount of shares to burn | The vUSD those shares represent |
+| Deposit | An amount of the vault’s asset | Vault shares |
+| Withdraw | An amount of the asset to take out | That asset, and the vault burns the shares required |
+| Redeem | An amount of shares to burn | The asset those shares represent |
 
-Deposit needs an ERC-20 allowance: the wallet approves the vault to take vUSD, then calls deposit. Withdraw and redeem spend shares the wallet already holds. Each step is a separate transaction, signed in the wallet, and each spends Sepolia ETH for gas.
+Deposit needs an allowance. The wallet approves the vault to take the asset, then calls deposit. When the allowance already covers the amount, the wallet signs the deposit only. Withdraw and redeem spend shares the wallet already holds. Each step is a separate transaction, signed in the wallet. The wallet pays the gas.
+
+A holder cannot take out more than the shares they hold, and cannot take out more of the asset than the vault holds.
 
 ## How many shares
 
-Share accounting follows the assets already in the vault. The first deposit sets the relationship between vUSD and shares. Later deposits and withdrawals use the vault’s current total. A deposit of more than zero vUSD that would mint zero shares is rejected. A deposit of zero is left to the standard behavior of the underlying implementation.
+Share accounting follows the assets already in the vault. The first deposit sets the relationship between the asset and the shares. Later deposits and withdrawals use the vault’s current total. A deposit of more than zero that would mint zero shares is rejected. A deposit of zero is left to the standard behavior of the underlying implementation.
 
-This demonstration vault does not add a fee on top of that accounting. There is no yield schedule and no strategy that changes the asset inside the vault. The vUSD balance changes when wallets deposit and withdraw.
+The share stays this claim through later work. A strategy, when that phase is built, puts assets inside the vault to work and returns them. It does not replace the share. Fees, caps, and a pause are configuration the first release adds on top of this accounting. Until that configuration is in place, a deposit changes the vault’s asset balance and nothing else does.
 
-## What the console is showing
+## What a balance means
 
-On a vault page, “vault total assets” is the vUSD held by the contract. “Your vUSD” and “your vault shares” are balances of the connected wallet. Those figures are read from Ethereum Sepolia at the moment the console loads them. They are not a statement of performance.
+The vault’s total assets are the underlying asset held by the contract. A holder’s asset balance and share balance are balances of their wallet. Both are reads from the chain at the moment they are loaded. They are a position, and they are not a statement of performance.

@@ -1,16 +1,16 @@
 # The vault
 
-A vault in this demonstration is an on-chain contract that accepts one underlying asset and issues shares in return. The asset and the share token live on Ethereum Sepolia. The vault address is chosen by the factory when the vault is created.
+A vault is an on-chain contract that accepts one underlying asset and issues shares in return. A business offers that vault under its own name. The factory chooses the vault address when the vault is created.
 
 ## One asset
 
-Each vault wraps the factory’s approved asset. In the current demonstration that asset is vUSD, a mintable ERC-20 named VaultOS Test Asset. The create form cannot pick a different token. A vault built for another asset would not match the code the factory approves, and the registry would reject it.
+Each vault holds one underlying asset, fixed when the vault is created. The factory deploys the vault for that asset. A vault built for a different asset does not match the code the factory approves, and the registry refuses to list it.
 
-vUSD is a faucet token for the demonstration. Holding it, or holding vault shares, is not a claim on a real-world asset and is not a customer balance at PineryZ.
+The first release keeps one asset per vault. Which asset that is, and who may mint it, is decided before the release locks. Supply of that asset is controlled. A later phase can introduce a new asset model for assets that stand for something off the chain. That phase keeps the same share standard.
 
 ## What creation does
 
-Creation deploys a new vault contract. It does not move vUSD into the vault. The vault starts empty. Value moves later, when a wallet deposits.
+Creation deploys a new vault contract. It does not move the asset into the vault. The vault starts empty. Value moves later, when a wallet deposits.
 
 The factory records:
 
@@ -19,8 +19,10 @@ The factory records:
 - the wallet that asked for the vault
 - the name and symbol chosen for the shares
 
-Those fields are also what the registry stores after the [registration check](/vaultos/registration) passes.
+Those fields are also what the registry stores after the [registration check](/vaultos/registration) passes. The wallet signs the creation. The product does not take the private key.
 
 ## What a vault is for
 
-The direction is a reusable vault pattern a business can offer under its own name, instead of assembling that contract stack itself. The demonstration is the pattern: one factory, one approved asset, and a vault the business names. Yield, other assets, and other networks are later product work. They are described in [Status and limits](/status).
+The vault is the product a business offers without assembling the factory, the registry, and the operator tools itself. The holder sees the business’s name on the share. PineryZ supplies what runs underneath.
+
+The first release makes that vault operable: configuration, an operator, a ledger, and a documented API. A strategy, the controls a firm needs for its own clients, and real-world assets are later work on the same vault. They are described from the [introduction](/).

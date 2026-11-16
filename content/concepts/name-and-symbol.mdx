@@ -1,20 +1,20 @@
 # Name and symbol
 
-The business chooses the vault name and the share symbol. Those two strings are what a holder sees on the share token. PineryZ stays underneath: the factory, the registry, and the console are the infrastructure, and the name on the vault is the business’s.
+The business chooses the vault name and the share symbol. Those two strings are what a holder sees on the share token. PineryZ stays underneath. The factory, the registry, and the means to operate the vault are the infrastructure, and the name on the share is the business’s.
 
-## What you can set
+## What the business sets
 
-| Field | Limit | Example role |
+| Field | Limit | What the holder sees |
 | --- | --- | --- |
-| Vault name | 1 to 64 bytes | The product name a customer would recognize |
+| Vault name | 1 to 64 bytes | The name on the vault |
 | Share symbol | 1 to 16 bytes | The short ticker on the share token |
 
-The limit is bytes, so a character outside basic ASCII can consume more than one. Empty values are rejected by the factory and by the console form. The factory also rejects names and symbols over those limits.
+The limit is bytes, so a character outside basic ASCII can consume more than one. Empty values are rejected. Names and symbols over those limits are rejected.
 
-The name and symbol are stored on the vault. They do not change the vault’s runtime code. Two vaults with different names can still match the factory’s approved code, because the approved code is tied to the asset, not to the label.
+The name and symbol are stored on the vault. They do not change the vault’s runtime code. Two vaults with different names can still match the factory’s approved code, because that code is tied to the asset, not to the label.
 
-## What you cannot set
+## What the name does not decide
 
-In this demonstration the underlying asset is fixed. Creating a vault named for a business does not change the asset from vUSD, does not assign the vault to a separate legal entity, and does not publish it on a network other than Ethereum Sepolia.
+The name does not choose the asset. Each vault still holds the one asset it was created for. The name does not assign the vault to a separate legal entity. The name does not, by itself, put the vault on another network.
 
-White-label, in the current demonstration, means the name and the symbol. Hosted branding, a separate deployment per customer, and APIs a customer embeds on its own site are product direction. They are listed as open scope in [Status and limits](/status).
+White-label, at the start of the build, is the name and the symbol. The first release adds the means to operate that named vault, including a documented API. Hosted branding, and a deployment under the firm’s own brand rather than a shared service, stay open. That choice is made with the build, and it is not implied by the strings stored on the vault.

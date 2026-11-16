@@ -11,6 +11,7 @@
   --color-on-teal: #f4fbfc;
   --color-paper: #f4f6f8;
   --color-paper-raised: #fbfcfd;
+  --color-canvas: #e4eaf0;
   --color-ink: #1a2330;
   --color-line: #d5dde6;
   --color-line-inverse: rgba(244, 246, 248, 0.16);
@@ -117,7 +118,30 @@ html {
 }
 
 .nextra-sidebar-footer {
+  background: var(--color-navy);
   border-top-color: var(--color-line-inverse);
+}
+
+.dark .nextra-sidebar-footer {
+  background: var(--color-navy-deep);
+}
+
+html.light .nextra-sidebar-footer button {
+  color: var(--color-text-inverse-soft);
+  background: transparent;
+}
+
+html.light .nextra-sidebar-footer button:hover {
+  background: var(--color-navy-raised);
+  color: var(--color-text-inverse);
+}
+
+html.light {
+  background: var(--color-canvas);
+}
+
+html.light article {
+  background: var(--color-paper-raised);
 }
 
 .nextra-callout {

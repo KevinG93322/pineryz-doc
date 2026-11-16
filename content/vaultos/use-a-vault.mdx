@@ -1,44 +1,27 @@
-# Use a vault
+# Operate a vault
 
-<Callout type="important">
-  Technical demonstration on Ethereum Sepolia. Balances on this page are reads from the chain.
-</Callout>
+Creation gives a business a named vault. Operating it is the rest of the first release. A holder still moves assets by signature. The business configures the vault, accounts for it, and connects its own system.
 
-Open a registered vault from Overview or My Vaults. The page reads balances from Ethereum Sepolia and sends deposit, withdraw, and redeem through the connected wallet.
+## What the first release adds
 
-Connect the wallet on Ethereum Sepolia before you move funds. Until you do, the page can still show the vault’s total assets, and your own balances stay unread.
-
-## What the page reads
-
-| Figure | Source |
+| Piece | What it does |
 | --- | --- |
-| Vault total assets | vUSD held by the vault contract |
-| Your vUSD | The connected wallet’s test-asset balance |
-| Your vault shares | The connected wallet’s share balance |
-| vUSD allowance | How much vUSD the vault is allowed to pull from the wallet |
+| Configuration | Fees, caps, and a pause. Share accounting stays [ERC-4626](/concepts/shares), including the guard against a deposit that would mint zero shares. |
+| Operator | A role that can change configuration after creation. Moving the assets stays a signature by the holder, unless a later phase decides otherwise. |
+| Ledger | A record of deposits, withdrawals, and redemptions. Balances remain reads from the chain. The ledger is the product’s own account of those movements. |
+| Monitoring | A view of the factory, the vaults, and the registry, and whether they are healthy. |
+| Operator API | A documented API a business system can call to create, read, and operate a vault. The console is one client of that API. |
 
-If a read fails, the page says the balances are unavailable and offers another read. A failed read does not change the vault.
+## What the holder still does
 
-<Steps>
+Deposit, withdraw, and redeem follow [Shares](/concepts/shares). The wallet signs each one and pays the gas. A deposit approves the vault first when the allowance is short of the amount. A holder cannot take out more than the shares they hold, and cannot take out more of the asset than the vault holds.
 
-### Deposit
+Those movements stay on the chain. The ledger records them. The registry’s history of creations is a separate record: it lists vaults that passed the creation check, and it does not replace the ledger.
 
-Enter a vUSD amount and submit **Deposit**. The form previews how many shares that amount would mint at the current rate. The amount has to be greater than zero and within the token’s decimals. A deposit that would mint zero shares is stopped before the wallet is asked to move tokens.
+## The first release is in place when
 
-If the vault’s allowance is below the amount, the wallet is asked to approve vUSD first, and then to deposit. That is two signatures. If the allowance already covers the amount, the wallet signs the deposit only. After the deposit confirms, the page reads the position again. See [Shares](/concepts/shares) for how the number of shares is set.
+- A business can name the asset, and strangers cannot mint it.
+- An operator can set a cap or a pause without taking holder funds.
+- Movements are in the ledger, and another system can call the API.
 
-### Withdraw
-
-**Withdraw assets** asks for the amount of vUSD to receive. The vault burns the shares required for that amount. **Use withdrawable balance** fills the amount the chain currently allows this wallet to withdraw.
-
-### Redeem
-
-**Redeem shares** asks for the amount of shares to burn. The vault sends the vUSD those shares represent. **Use redeemable shares** fills the amount the chain currently allows this wallet to redeem.
-
-An amount above that balance is rejected in the form, before a transaction is sent. You cannot take out more than the shares you hold, and you cannot take out more vUSD than the vault holds.
-
-</Steps>
-
-## Receipts
-
-Deposit, withdraw, and redeem receipts stay on Ethereum Sepolia. The console links a receipt after the wallet confirms it. Transaction History in the sidebar lists creation records from the registry, not every deposit.
+Until then, a deposit changes the vault’s asset balance, and the share accounts for it. Configuration, the operator, the ledger, and the API are the work this release builds. The work after it is on [The build](/vaultos/build).

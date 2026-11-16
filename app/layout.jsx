@@ -20,7 +20,7 @@ export const metadata = {
     template: '%s – PineryZ Docs'
   },
   description:
-    'Documentation for PineryZ and the VaultOS demonstration on Ethereum Sepolia.',
+    'Documentation for VaultOS, the vault a business offers under its own name.',
   applicationName: 'PineryZ Docs'
 }
 

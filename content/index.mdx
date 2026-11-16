@@ -2,37 +2,75 @@
 title: Introduction
 ---
 
-# PineryZ Docs
+# VaultOS
 
-PineryZ builds on-chain vault infrastructure for businesses that want to launch and manage their own vault products. VaultOS is the planned flagship. The public example of that work is a technical demonstration on Ethereum Sepolia.
+PineryZ builds the vault a business offers under its own name. The holder of the share sees that name. PineryZ supplies the factory, the registry, and the means to operate the vault.
+
+The foundation for that vault is already running. These pages describe the product built on it: what a business gets, how a vault works, and the work still to do.
 
 <Callout type="important">
-  Technical demonstration on Ethereum Sepolia. These pages are not a description of a live financial service.
+  These pages describe the product being built. They state no release date, and they are not an offer of securities.
 </Callout>
 
-## Start here
+## What a business gets
+
+A way to launch a vault, configure it, account for it, and monitor it, without assembling the factory, the registry, and the operator tools itself.
+
+The business chooses the name and the symbol. Its clients see that name. PineryZ stays underneath.
+
+## What a holder sees
+
+A share token in the business’s name and symbol. The share is an ERC-4626 claim on the assets in the vault. The wallet signs every movement. The product does not take the private key.
+
+## The first release
+
+The first release is an operable vault:
+
+- An asset whose supply the product controls
+- Configuration a business can set after creation, including fees, caps, and a pause
+- An operator role for that configuration
+- A ledger of deposits, withdrawals, and redemptions
+- A documented API a business system can call
+
+The console is one client of that API. The work after this release is [the build](/vaultos/build): strategies, the controls a firm needs for its own clients, real-world assets, and a surface for other builders.
+
+## Who the product is built for
+
+| Segment | The vault they would offer |
+| --- | --- |
+| Real-world asset platforms | A vault around a tokenized asset, once that part of the product is built |
+| Asset managers | A vault in their name, which they operate |
+| Decentralized finance, fintech, and Web3 | A vault without assembling the factory, the registry, and the operator tools |
+
+No segment is chosen as the first. No customer is named. Choosing a segment can pull later work forward. It does not skip the operable vault.
+
+## Rules the product keeps
+
+- The wallet signs. The product does not take the private key.
+- A vault is listed only after its creation transaction checks out.
+- The share stays ERC-4626. Later work sits behind that claim.
+
+## Read next
 
 <Cards>
-  <Cards.Card title="Evaluate VaultOS" href="/vaultos">
-    Product direction, who it is for, and what is deployed today.
+  <Cards.Card title="The vault" href="/concepts/vault">
+    One asset, one factory, and what creation does.
   </Cards.Card>
-  <Cards.Card title="Use the demonstration" href="/getting-started">
-    Open the console, create a vault, and move demonstration vUSD.
+  <Cards.Card title="Shares" href="/concepts/shares">
+    How a deposit becomes a claim, and how that claim is returned.
   </Cards.Card>
-  <Cards.Card title="Join the team" href="/vaultos/careers">
-    Open roles for contracts, the registry, the console, and design.
+  <Cards.Card title="Name and symbol" href="/concepts/name-and-symbol">
+    The name a business puts on the share its clients see.
+  </Cards.Card>
+  <Cards.Card title="Registration" href="/vaultos/registration">
+    The check that lists a vault after it is created.
   </Cards.Card>
 </Cards>
 
-Terms used in the console are in [Concepts](/concepts). The checks behind a registered vault are in [Registration](/vaultos/registration). What the demonstration leaves out is in [Status and limits](/status).
-
-## What the demonstration is
-
-The console at [demo.pineryz.com](https://demo.pineryz.com) lets a wallet on Ethereum Sepolia mint demonstration vUSD, create a vault under a chosen name and symbol, and deposit or withdraw that asset. The registry records a vault after it verifies the creation transaction. The wallet signs every transaction. VaultOS does not receive the private key.
+The work after the first release is on [The build](/vaultos/build). Open roles are on [Careers](/vaultos/careers). What the product includes, and what is later, is on [Status and limits](/status).
 
 ## Related sites
 
 - [PineryZ](https://pineryz.com) — company site
 - [VaultOS on the website](https://pineryz.com/vaultos) — product introduction
-- [VaultOS console](https://demo.pineryz.com) — the demonstration
 - [Contact](https://pineryz.com/contact) — info@pineryz.com

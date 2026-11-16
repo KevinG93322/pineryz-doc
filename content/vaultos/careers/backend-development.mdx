@@ -1,18 +1,18 @@
 # Backend development
 
-As a backend developer at PineryZ, you will help build the registry and APIs behind VaultOS. The work is how a vault is recorded after its creation transaction is checked, and how that record stays available to the console.
+You will build the services that let a business operate a vault after it exists. The registry already stores a vault after its creation transaction checks out. This role adds the ledger and the operator API.
 
-You will design clear Node.js and TypeScript services, with PostgreSQL for the vault metadata and a read of the chain for verification. That covers the path from a creation transaction to a vault the console can show.
+The opening work is a record of deposits, withdrawals, and redemptions, and a documented API a business system can call to create, read, and operate a vault. Balances remain reads from the chain. The console becomes one client of that API. The registry does not take custody of the assets.
 
-This is a chance to build the foundation a business can offer as its own on-chain vault product, and to leave room for the yield platform that comes later.
+An SDK, reports for a firm’s own clients, and a second region come later, on [The build](/vaultos/build). They wait on a stable API shape.
 
 ## Responsibilities
 
-- Shape the registry that stores vault metadata in PostgreSQL, including the business’s own name and symbol.
-- Verify the creation transaction before a vault is registered in the console.
-- Keep the APIs careful from design through review.
-- Write the tests that exercise registration and verification.
-- Work with the engineers building the contracts and the product around the vault.
+- Keep the registry’s creation check: one row, after the transaction matches the factory’s approved asset and code. The checks are on [Registration](/vaultos/registration).
+- Add a ledger of deposits, withdrawals, and redemptions. The ledger accounts for movements. It does not replace the chain balances.
+- Design the operator API a business system can call, in Node.js and TypeScript, with PostgreSQL for the product’s own records.
+- Write the tests that exercise registration, the ledger, and the API.
+- Work with the engineers building the contracts and the console, so the console is one client of the same API.
 
 ## Requirements
 
@@ -20,12 +20,12 @@ This is a chance to build the foundation a business can offer as its own on-chai
 - Familiarity with PostgreSQL and HTTP APIs.
 - Ability to explain a design clearly, in writing and in review.
 - Comfort reading an existing codebase and extending the same pattern.
-- Care for testing, and for saying what a demonstration does not yet do.
+- Care for tests, and for stating what an API does.
 
 ## What we offer
 
-- Work on VaultOS, PineryZ’s on-chain vault foundation.
-- A role focused on the registry a business relies on when it offers a vault under its own name.
+- Work on VaultOS, from the [foundation](/vaultos/foundation) already running to the [first release](/vaultos/use-a-vault).
+- A role focused on the ledger and the API a business uses to operate a vault under its own name.
 - Collaboration with the people building the contracts and the console.
 
 ## Apply

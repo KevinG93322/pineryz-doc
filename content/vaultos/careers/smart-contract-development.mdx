@@ -1,18 +1,19 @@
 # Smart contract development
 
-As a smart contract developer at PineryZ, you will help design the vault contracts behind VaultOS. The work is the contracts themselves, and also how a business launches a vault under its own name and symbol.
+You will design the contracts for the vault a business offers under its own name. The factory and the ERC-4626 vault are already running. This role extends them into the first release.
 
-You will design secure, clear, and reusable Solidity for an ERC-4626 vault on an EVM network. That covers the vault pattern, the asset it accepts, and the check that runs before a vault is registered in the console.
+The opening work is a controlled asset, configuration on the vault, and an operator who can set a fee, a cap, or a pause without taking holder funds. The share stays ERC-4626, including the guard against a deposit that would mint zero shares. The wallet signs every movement. The product does not take the private key.
 
-This is a chance to build the foundation a business can offer as its own on-chain vault product, and to leave room for the yield platform that comes later.
+A strategy module, separated roles, and a new asset model come later, on [The build](/vaultos/build). They are not the first contracts this role writes.
 
 ## Responsibilities
 
-- Shape the ERC-4626 vault and the ERC-20 asset it uses, so the same pattern can be launched again under a business’s own name and symbol.
-- Keep the contracts careful from design through review.
-- Connect contract creation to the console, which verifies the creation transaction before a vault is registered.
-- Write the tests and scripts that exercise the vault.
-- Work with the engineers building the registry and the product around the vault.
+- Extend the vault and the factory so a business can offer one controlled asset under its own name and symbol.
+- Add configuration for fees, caps, and a pause, with share accounting left on the ERC-4626 standard.
+- Keep moving assets as a signature by the holder. The operator changes configuration.
+- Keep the registration checks honest: a vault is listed only when its creation transaction matches the factory’s approved asset and code.
+- Write the tests that exercise creation, deposit, withdrawal, redemption, and the new configuration.
+- Review the vault, the factory, and those checks before an asset of value is accepted.
 
 ## Requirements
 
@@ -20,13 +21,13 @@ This is a chance to build the foundation a business can offer as its own on-chai
 - Familiarity with ERC-20 and ERC-4626.
 - Ability to explain a design clearly, in writing and in review.
 - Comfort reading an existing codebase and extending the same pattern.
-- Care for testing, and for saying what a demonstration does not yet do.
+- Care for tests, and for stating what a contract does.
 
 ## What we offer
 
-- Work on VaultOS, PineryZ’s on-chain vault foundation.
-- A role focused on the vault a business can offer under its own name.
-- Collaboration with the people building the console and the product around it.
+- Work on VaultOS, from the [foundation](/vaultos/foundation) already running to the [first release](/vaultos/use-a-vault).
+- A role focused on the vault a business offers under its own name.
+- Collaboration with the people building the registry, the API, and the console.
 
 ## Apply
 

@@ -1,32 +1,32 @@
 # Frontend development
 
-As a frontend developer at PineryZ, you will help build the console around VaultOS. The work is the interface a business uses to launch a vault under its own name and symbol, and to see that vault after it is registered.
+You will build the screens a business uses to create a vault and operate it. The console already creates a vault and reads it back. This role makes that console one client of the operator API, and adds the screens for configuration, the ledger, and monitoring.
 
-You will design clear React and Next.js screens in TypeScript. That covers the creation flow, the vault list, and the check the console shows before a vault is registered. The console connects an external wallet on Ethereum Sepolia. The wallet signs each transaction. VaultOS does not receive the key.
+The wallet signs every transaction. VaultOS does not receive the key. A screen asks the wallet to switch to the network the product is using, and it does not submit on another chain.
 
-This is a chance to build the foundation a business can offer as its own on-chain vault product, and to leave room for the yield platform that comes later.
+Strategies, a firm’s own application, and an SDK come later, on [The build](/vaultos/build). The opening screens are the [first release](/vaultos/use-a-vault).
 
 ## Responsibilities
 
-- Shape the console a business uses to create a vault and review it after registration.
-- Present the vault under the business’s own name and symbol.
-- Show the creation-transaction check before a vault is registered.
-- Keep the interface careful from design through review.
-- Work with the engineers building the registry and the contracts.
+- Shape the flow for creating a vault under the business’s name and symbol, and for seeing it after [registration](/vaultos/registration).
+- Add the screens an operator uses to set a fee, a cap, or a pause, without a control that takes holder funds.
+- Show deposits, withdrawals, and redemptions from the ledger, and link the chain receipt after the wallet confirms it.
+- Connect an external wallet: read the chain, request a switch, and ask the wallet to sign.
+- Work with the engineers building the API and the contracts, so the console calls the same API a business system can call.
 
 ## Requirements
 
 - Experience with React, Next.js, and TypeScript.
-- Familiarity with product screens for creating and reviewing a vault.
-- Experience connecting a browser wallet: reading the chain, switching to Ethereum Sepolia, and asking the wallet to sign.
-- Ability to explain a design clearly, in writing and in review.
+- Experience connecting a browser wallet: reading the chain, requesting a network switch, and asking the wallet to sign.
+- Ability to explain a screen clearly, in writing and in review.
 - Comfort reading an existing codebase and extending the same pattern.
+- Care for what a screen promises. A screen states the action the product can perform.
 
 ## What we offer
 
-- Work on VaultOS, PineryZ’s on-chain vault foundation.
+- Work on VaultOS, from the [foundation](/vaultos/foundation) already running to the [first release](/vaultos/use-a-vault).
 - A role focused on the console a business uses to offer a vault under its own name.
-- Collaboration with the people building the contracts and the registry.
+- Collaboration with the people building the contracts and the API.
 
 ## Apply
 
